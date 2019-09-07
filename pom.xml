@@ -5,19 +5,41 @@
 	<groupId>io.github.jdiscordbots</groupId>
 	<artifactId>nightdream-logging</artifactId>
 	<version>1.0.0</version>
+	<packaging>jar</packaging>
 	<name>NightDream Logging</name>
 	<description>a simple, colorful Logging Library</description>
-	<scm>
-		<connection>scm:git:git@github.com:JDiscordBots/NightDream-Logging.git</connection>
-		<developerConnection>scm:git:git@github.com:JDiscordBots/NightDream-Logging.git</developerConnection>
-		<url>scm:git:git@github.com:JDiscordBots/NightDream-Logging</url>
-	</scm>
+	<url>https://github.com/JDiscordBots/NightDream-Logging</url>
 	<licenses>
 		<license>
 			<name>Boost Software License 1.0</name>
 			<url>https://www.boost.org/LICENSE_1_0.txt</url>
 		</license>
 	</licenses>
+	<developers>
+		<developer>
+			<id>danthe1st</id>
+			<name>Daniel</name>
+			<roles>
+				<role>Developer</role>
+			</roles>
+			<email>daniel@wwwmaster.at</email>
+			<timezone>+1</timezone>
+		</developer>
+		<developer>
+			<id>byNoobiYT</id>
+			<name>Lucas</name>
+			<roles>
+				<role>Developer</role>
+			</roles>
+			<timezone>+1</timezone>
+		</developer>
+	</developers>
+	<scm>
+		<connection>scm:git:git@github.com:JDiscordBots/NightDream-Logging.git</connection>
+		<developerConnection>scm:git:git@github.com:JDiscordBots/NightDream-Logging.git</developerConnection>
+		<url>scm:git:git@github.com:JDiscordBots/NightDream-Logging</url>
+	</scm>
+
 	<distributionManagement>
 		<snapshotRepository>
 			<id>ossrh</id>
@@ -28,6 +50,9 @@
 			<url>https://oss.sonatype.org/content/repositories/releases</url>
 		</repository>
 	</distributionManagement>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>com.diogonunes</groupId>
@@ -47,10 +72,10 @@
 				</configuration>
 			</plugin>
 			<plugin>
-	  			<groupId>com.github.spotbugs</groupId>
-		  		<artifactId>spotbugs-maven-plugin</artifactId>
-		  		<version>3.1.11</version>
-		  	</plugin>
+				<groupId>com.github.spotbugs</groupId>
+				<artifactId>spotbugs-maven-plugin</artifactId>
+				<version>3.1.11</version>
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-gpg-plugin</artifactId>
@@ -176,27 +201,4 @@
 			</build>
 		</profile>
 	</profiles>
-	<developers>
-		<developer>
-			<id>danthe1st</id>
-			<name>Daniel</name>
-			<roles>
-				<role>Developer</role>
-			</roles>
-			<email>daniel@wwwmaster.at</email>
-			<timezone>+1</timezone>
-		</developer>
-		<developer>
-			<id>byNoobiYT</id>
-			<name>Lucas</name>
-			<roles>
-				<role>Developer</role>
-			</roles>
-			<timezone>+1</timezone>
-		</developer>
-	</developers>
-	<url>https://github.com/JDiscordBots/NightDream-Logging</url>
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	</properties>
 </project>
