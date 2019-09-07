@@ -26,6 +26,6 @@ jobs:
         sonarcloud:
           organization: "nightdream"
       script:
-      - git fetch --unshallow
+      - git fetch --unshallow || true
       - sonar-scanner -Dsonar.projectKey=JDiscordBots_NightDream-Logging -Dsonar.host.url=https://sonarcloud.io -Dsonar.sources=src/ -Dsonar.java.binaries=target/ -Dsonar.java.libraries=target/
       if: type = push

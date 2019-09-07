@@ -1,4 +1,7 @@
-# NightDream Logging
+# NightDream Logging 
+[![Build Status](https://travis-ci.com/JDiscordBots/NightDream-Logging.svg?branch=master)](https://travis-ci.com/JDiscordBots/NightDream-Logging)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=JDiscordBots_NightDream-Logging&metric=alert_status)](https://sonarcloud.io/dashboard?id=JDiscordBots_NightDream-Logging)
+
 a simple, colorful Logging Library
 
 ## use Nightdream Logging
