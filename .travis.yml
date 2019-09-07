@@ -29,9 +29,3 @@ jobs:
       - git fetch --unshallow
       - sonar-scanner -Dsonar.projectKey=JDiscordBots_NightDream-Logging -Dsonar.host.url=https://sonarcloud.io -Dsonar.sources=src/ -Dsonar.java.binaries=target/ -Dsonar.java.libraries=target/
       if: type = push
-    - stage: "Upload to Wiki"
-      jdk:
-      - openjdk8
-      script:
-        - ./saveJAR.sh
-      if: (branch = master) AND (type = push)
