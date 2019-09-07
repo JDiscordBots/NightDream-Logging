@@ -180,10 +180,9 @@ public class NDLogger {
 		}
 	}
 
-	/**
-	 * Used for logging tests
-	 */
+	/*
 	public static void main(String[] args) {
 		logWithModule(LogType.DONE, "TEST", "test message",new Exception());
 	}
+	*/
 }
