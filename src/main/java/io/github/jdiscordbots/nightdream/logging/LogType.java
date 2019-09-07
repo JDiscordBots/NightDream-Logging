@@ -1,7 +1,7 @@
 /*
  * Copyright (c) JDiscordBots 2019
  * File: LogType.java
- * Project: NightDream
+ * Project: nightdream-logging
  * Licenced under Boost Software License 1.0
  */
 

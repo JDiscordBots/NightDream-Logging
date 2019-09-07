@@ -1,7 +1,7 @@
 /*
  * Copyright (c) JDiscordBots 2019
  * File: NDLogger.java
- * Project: NightDream
+ * Project: nightdream-logging
  * Licenced under Boost Software License 1.0
  */
 
@@ -180,10 +180,9 @@ public class NDLogger {
 		}
 	}
 
-	/**
-	 * Used for logging tests
-	 */
+	/*
 	public static void main(String[] args) {
 		logWithModule(LogType.DONE, "TEST", "test message",new Exception());
 	}
+	*/
 }
