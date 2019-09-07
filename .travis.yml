@@ -1,0 +1,37 @@
+language: java
+jobs:
+  include:
+    - stage: "compile with different Java versions"
+      name: Java 8
+      jdk:
+      - openjdk8
+      install: true
+      script: mvn compile
+    - name: Java 12
+      jdk:
+      - openjdk12
+      install: true
+      script: mvn compile
+    - stage: "static code analysis"
+      name: Spotbugs - Java 8
+      jdk:
+        - openjdk8
+      script: mvn spotbugs:check
+    - name: Spotbugs - Java 12
+      jdk:
+        - openjdk12
+      script: mvn spotbugs:check
+    - name: SonarLint/SonarCloud
+      addons:
+        sonarcloud:
+          organization: "nightdream"
+      script:
+      - git fetch --unshallow
+      - sonar-scanner -Dsonar.projectKey=JDiscordBots_NightDream-Logging -Dsonar.host.url=https://sonarcloud.io -Dsonar.sources=src/ -Dsonar.java.binaries=target/ -Dsonar.java.libraries=target/
+      if: type = push
+    - stage: "Upload to Wiki"
+      jdk:
+      - openjdk8
+      script:
+        - ./saveJAR.sh
+      if: (branch = master) AND (type = push)
