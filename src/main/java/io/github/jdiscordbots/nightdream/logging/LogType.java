@@ -20,8 +20,8 @@ public enum LogType {
 	ERROR(30,FColor.RED),
 	FATAL(20,FColor.RED),//rainbow???
 	DEBUG(90,FColor.CYAN),
-	ARROW(1,FColor.RED,BColor.WHITE,">>>>>"),
-	DEFAULT(1,FColor.WHITE,BColor.CYAN,"====>");
+	ARROW(60,FColor.RED,BColor.WHITE,">>>>>"),
+	DEFAULT(60,FColor.WHITE,BColor.CYAN,"====>");
 	
 	private String prefix;
 	private int level;
