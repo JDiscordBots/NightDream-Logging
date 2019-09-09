@@ -59,5 +59,7 @@ public enum LogType {
 		return fColor;
 	}
 	
-	
+	public boolean isHigherOrEqualThan(LogType type) {
+		return level<=type.level;
+	}
 }

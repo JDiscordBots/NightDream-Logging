@@ -21,23 +21,23 @@ public class NDLogger {
 	private static Map<String, NDLogger> loggers=new HashMap<>();
 	private static ColoredPrinter printer;
 	
-	private static final int DEFAULT_LEVEL; //TODO actually use it
+	private static final LogType DEFAULT_LEVEL;
 	
 	private String module;
+	private LogType loggable;
 	
 	static {
 		LogType level = LogType.INFO;
-		
 		String levelProp = System.getProperty(PROP_PREFIX+"Level",level.name()).toUpperCase();
 		try{
 			level = LogType.valueOf(levelProp);
 		}catch (IllegalArgumentException e) {
 			//ignore
 		}
-		DEFAULT_LEVEL=level.getLevel();
+		DEFAULT_LEVEL=level;
 		if(!"false".equalsIgnoreCase(System.getProperty(PROP_PREFIX + "colors"))) {
 			boolean timestamp=Boolean.parseBoolean(System.getProperty(PROP_PREFIX+"timestamp","false"));
-			printer=new ColoredPrinter.Builder(DEFAULT_LEVEL, timestamp).build();
+			printer=new ColoredPrinter.Builder(DEFAULT_LEVEL.getLevel(), timestamp).build();
 		}
 	}
 
@@ -46,6 +46,14 @@ public class NDLogger {
 	 */
 	private NDLogger(String module) {
 		this.module=module;
+		String propLevel = System.getProperty(PROP_PREFIX+"Level."+module);
+		if(propLevel!=null) {
+			try{
+				loggable = LogType.valueOf(propLevel);
+			}catch (IllegalArgumentException e) {
+				//ignore
+			}
+		}
 	}
 
 	/**
@@ -138,13 +146,15 @@ public class NDLogger {
 	 * @param throwable {@link Throwable} to log
 	 */
 	public void log(LogType level,String message,Throwable throwable) {
-		if(printer==null) {
-			throwable.printStackTrace();
-		}else {
-			synchronized (System.out) {
-				log(level,message);
-				throwable.printStackTrace(System.out);
-				printer.clear();
+		if(isLoggable(level)) {
+			if(printer==null) {
+				throwable.printStackTrace();
+			}else {
+				synchronized (System.out) {
+					log(level,message);
+					throwable.printStackTrace(System.out);
+					printer.clear();
+				}
 			}
 		}
 	}
@@ -154,35 +164,54 @@ public class NDLogger {
 	 * @param message message to log
 	 */
 	public void log(LogType level,String message) {
-		synchronized (System.out) {
-			if(level==null) {
-				level=LogType.DEFAULT;
-			}
-			if(printer==null) {
-				System.out.print(String.format("%-6s",level.getPrefix())+"| "+message);
-				if(module!=null) {
-					System.out.print(" | "+module);
+		if(isLoggable(level)) {
+			synchronized (System.out) {
+				if(level==null) {
+					level=LogType.DEFAULT;
 				}
-			}else {
-				printer.print(String.format("%-6s",level.getPrefix()), Attribute.NONE, level.getfColor(), level.getbColor());
-				printer.clear();
-				printer.print("| ");
-				printer.print(message,Attribute.LIGHT,FColor.WHITE,BColor.NONE);
-				if(module!=null) {
+				if(printer==null) {
+					System.out.print(String.format("%-6s",level.getPrefix())+"| "+message);
+					if(module!=null) {
+						System.out.print(" | "+module);
+					}
+				}else {
+					printer.print(String.format("%-6s",level.getPrefix()), Attribute.NONE, level.getfColor(), level.getbColor());
 					printer.clear();
-					printer.print(" | ");
-					printer.print(module);
+					printer.print("| ");
+					printer.print(message,Attribute.LIGHT,FColor.WHITE,BColor.NONE);
+					if(module!=null) {
+						printer.clear();
+						printer.print(" | ");
+						printer.print(module);
+					}
+					printer.clear();
+					
 				}
-				printer.clear();
-				
+				System.out.println();
 			}
-			System.out.println();
 		}
 	}
 
-	/*
-	public static void main(String[] args) {
-		logWithModule(LogType.DONE, "TEST", "test message",new Exception());
+	public boolean isLoggable(LogType level) {
+		if(level==null) {
+			return false;
+		}
+		LogType compare;
+		if(loggable==null) {
+			compare=DEFAULT_LEVEL;
+		}else {
+			compare=loggable;
+		}
+		return level.isHigherOrEqualThan(compare);
 	}
-	*/
+	
+	public void setMinimum(LogType min) {
+		loggable=min;
+	}
+	
+//	public static void main(String[] args) {
+//		System.setProperty(PROP_PREFIX+"Level.TEST", "DEBUG");
+//		logWithModule(LogType.DEBUG, "TEST", ""+LogType.FATAL.isHigherOrEqualThan(LogType.DONE));
+//	}
+	
 }
