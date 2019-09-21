@@ -191,7 +191,11 @@ public class NDLogger {
 			}
 		}
 	}
-
+	/**
+	 * tests if a {@link LogType} will be logged or not
+	 * @param level the {@link LogType} to check
+	 * @return <code>true</code> if it is loggable
+	 */
 	public boolean isLoggable(LogType level) {
 		if(level==null) {
 			return false;
@@ -204,14 +208,18 @@ public class NDLogger {
 		}
 		return level.isHigherOrEqualThan(compare);
 	}
-	
+	/**
+	 * sets the minimum {@link LogType}.<br>
+	 * Logs with this LogType or higher will be logged.
+	 * @param min the minimum {@link LogType}
+	 */
 	public void setMinimum(LogType min) {
 		loggable=min;
 	}
 	
-	public static void main(String[] args) {
-		System.setProperty(PROP_PREFIX+"Level.TEST", "DEBUG");
-		logWithModule(LogType.DEBUG, "TEST", ""+LogType.FATAL.isHigherOrEqualThan(LogType.DONE));
-	}
+//	public static void main(String[] args) {
+//		System.setProperty(PROP_PREFIX+"Level.TEST", "DEBUG");
+//		logWithModule(LogType.DEBUG, "TEST", ""+LogType.FATAL.isHigherOrEqualThan(LogType.DONE));
+//	}
 	
 }

@@ -45,20 +45,40 @@ public enum LogType {
 		this.fColor=fColor;
 		this.bColor=bColor;
 	}
-	
+	/**
+	 * gets the prefix of this {@link LogType} (before |)
+	 * @return the prefix
+	 */
 	public String getPrefix() {
 		return prefix;
 	}
+	/**
+	 * gets the severity of this {@link LogType}<br>
+	 * Lower means more severe.
+	 * @return the severity(level) as integer
+	 */
 	public int getLevel() {
 		return level;
 	}
+	/**
+	 * gets the background color as JCDP {@link BColor}
+	 * @return the background color
+	 */
 	public BColor getbColor() {
 		return bColor;
 	}
+	/**
+	 * gets the foreground color as JCDP {@link FColor}
+	 * @return the foreground color
+	 */
 	public FColor getfColor() {
 		return fColor;
 	}
-	
+	/**
+	 * tests if this logType is logged if a given {@link LogType} is the default level.
+	 * @param type the given {@link LogType} (default level)
+	 * @return <code>true</code> if this {@link LogType} would be logged.
+	 */
 	public boolean isHigherOrEqualThan(LogType type) {
 		return level<=type.level;
 	}
