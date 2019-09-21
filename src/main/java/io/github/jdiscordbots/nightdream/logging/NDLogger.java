@@ -178,7 +178,7 @@ public class NDLogger {
 					printer.print(String.format("%-6s",level.getPrefix()), Attribute.NONE, level.getfColor(), level.getbColor());
 					printer.clear();
 					printer.print("| ");
-					printer.print(message,Attribute.LIGHT,FColor.WHITE,BColor.NONE);
+					printer.print(message,Attribute.LIGHT,FColor.NONE,BColor.NONE);
 					if(module!=null) {
 						printer.clear();
 						printer.print(" | ");
@@ -209,9 +209,9 @@ public class NDLogger {
 		loggable=min;
 	}
 	
-//	public static void main(String[] args) {
-//		System.setProperty(PROP_PREFIX+"Level.TEST", "DEBUG");
-//		logWithModule(LogType.DEBUG, "TEST", ""+LogType.FATAL.isHigherOrEqualThan(LogType.DONE));
-//	}
+	public static void main(String[] args) {
+		System.setProperty(PROP_PREFIX+"Level.TEST", "DEBUG");
+		logWithModule(LogType.DEBUG, "TEST", ""+LogType.FATAL.isHigherOrEqualThan(LogType.DONE));
+	}
 	
 }
