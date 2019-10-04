@@ -11,7 +11,6 @@ import com.diogonunes.jcdp.color.api.Ansi.BColor;
 import com.diogonunes.jcdp.color.api.Ansi.FColor;
 
 public enum LogType {
-	//TODO fill correct levels
 	LOG(80,FColor.WHITE),
 	WARN(40,FColor.YELLOW),
 	QUESTION(50,FColor.MAGENTA,"?????"),
@@ -30,10 +29,6 @@ public enum LogType {
 	
 	private LogType(int level,FColor fColor) {
 		this(level,fColor,BColor.NONE,null);
-		prefix=name();
-	}
-	private LogType(int level,FColor fColor,BColor bColor) {
-		this(level,fColor,bColor,null);
 		prefix=name();
 	}
 	private LogType(int level,FColor fColor,String name) {
