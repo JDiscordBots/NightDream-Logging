@@ -164,11 +164,11 @@ public class NDLogger {
 	 * @param message message to log
 	 */
 	public void log(LogType level,String message) {
+		if(level==null) {
+			level=LogType.DEFAULT;
+		}
 		if(isLoggable(level)) {
 			synchronized (System.out) {
-				if(level==null) {
-					level=LogType.DEFAULT;
-				}
 				if(printer==null) {
 					System.out.print(String.format("%-6s",level.getPrefix())+"| "+message);
 					if(module!=null) {
