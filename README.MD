@@ -12,7 +12,7 @@ a simple, colorful Logging Library
 		<groupId>io.github.jdiscordbots</groupId>
 		<artifactId>nightdream-logging</artifactId>
 		<version>VERSION</version>
-		<scope>provided</scope>
+		<scope>compile</scope>
 	</dependency>
 </dependencies>
 ```
