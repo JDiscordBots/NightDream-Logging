@@ -7,6 +7,9 @@
 
 package io.github.jdiscordbots.nightdream.logging;
 
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,6 +23,7 @@ public class NDLogger {
 	private static final String PROP_PREFIX="io.github.jdiscordbots.nightdream.logging.";
 	private static Map<String, NDLogger> loggers=new HashMap<>();
 	private static ColoredPrinter printer;
+	private static boolean timestamp;
 	
 	private static final LogType DEFAULT_LEVEL;
 	
@@ -36,8 +40,8 @@ public class NDLogger {
 		}
 		DEFAULT_LEVEL=level;
 		if(!"false".equalsIgnoreCase(System.getProperty(PROP_PREFIX + "colors"))) {
-			boolean timestamp=Boolean.parseBoolean(System.getProperty(PROP_PREFIX+"timestamp","false"));
-			printer=new ColoredPrinter.Builder(DEFAULT_LEVEL.getLevel(), timestamp).build();
+			timestamp=Boolean.parseBoolean(System.getProperty(PROP_PREFIX+"timestamp","false"));
+			printer=new ColoredPrinter.Builder(DEFAULT_LEVEL.getLevel(), false).build();
 		}
 	}
 
@@ -174,22 +178,31 @@ public class NDLogger {
 					if(module!=null) {
 						System.out.print(" | "+module);
 					}
+					if(timestamp) {
+						System.out.println(" | "+getCurrentTime());
+					}
 				}else {
+					
 					printer.print(String.format("%-6s",level.getPrefix()), Attribute.NONE, level.getfColor(), level.getbColor());
 					printer.clear();
 					printer.print("| ");
 					printer.print(message,Attribute.LIGHT,FColor.NONE,BColor.NONE);
+					printer.clear();
 					if(module!=null) {
-						printer.clear();
 						printer.print(" | ");
 						printer.print(module);
 					}
-					printer.clear();
-					
+					if(timestamp) {
+						printer.print(" | ");
+						printer.print(getCurrentTime());
+					}
 				}
 				System.out.println();
 			}
 		}
+	}
+	private static String getCurrentTime() {
+		return Instant.now().atZone(ZoneId.systemDefault()).format(DateTimeFormatter.ofPattern("EEE MMM dd yyyy HH:mm:ss 'GMT'Z (zzz)"));
 	}
 	/**
 	 * tests if a {@link LogType} will be logged or not
@@ -217,9 +230,9 @@ public class NDLogger {
 		loggable=min;
 	}
 	
-//	public static void main(String[] args) {
-//		System.setProperty(PROP_PREFIX+"Level.TEST", "DEBUG");
-//		logWithModule(LogType.DEBUG, "TEST", ""+LogType.FATAL.isHigherOrEqualThan(LogType.DONE));
-//	}
+	public static void main(String[] args) {
+		System.setProperty(PROP_PREFIX+"Level.TEST", "DEBUG");
+		logWithModule(LogType.DEBUG, "TEST", ""+LogType.FATAL.isHigherOrEqualThan(LogType.DONE));
+	}
 	
 }

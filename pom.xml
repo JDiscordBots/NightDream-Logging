@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>io.github.jdiscordbots</groupId>
 	<artifactId>nightdream-logging</artifactId>
-	<version>1.1.1</version>
+	<version>1.1.2</version>
 	<packaging>jar</packaging>
 	<name>NightDream Logging</name>
 	<description>a simple, colorful Logging Library</description>
