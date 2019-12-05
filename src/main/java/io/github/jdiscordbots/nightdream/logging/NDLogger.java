@@ -162,9 +162,8 @@ public class NDLogger {
 			}
 		}
 	}
-
 	/**
-	 * @param level {@link LogType logtype}
+	 * @param level {@link LogType log type}
 	 * @param message message to log
 	 */
 	public void log(LogType level,String message) {
@@ -174,31 +173,36 @@ public class NDLogger {
 		if(isLoggable(level)) {
 			synchronized (System.out) {
 				if(printer==null) {
-					System.out.print(String.format("%-6s",level.getPrefix())+"| "+message);
-					if(module!=null) {
-						System.out.print(" | "+module);
-					}
-					if(timestamp) {
-						System.out.println(" | "+getCurrentTime());
-					}
+					logWithoutColors(level,message);
 				}else {
-					
-					printer.print(String.format("%-6s",level.getPrefix()), Attribute.NONE, level.getfColor(), level.getbColor());
-					printer.clear();
-					printer.print("| ");
-					printer.print(message,Attribute.LIGHT,FColor.NONE,BColor.NONE);
-					printer.clear();
-					if(module!=null) {
-						printer.print(" | ");
-						printer.print(module);
-					}
-					if(timestamp) {
-						printer.print(" | ");
-						printer.print(getCurrentTime());
-					}
+					logColorful(level,message);
 				}
 				System.out.println();
 			}
+		}
+	}
+	private void logWithoutColors(LogType level,String message) {
+		System.out.print(String.format("%-6s",level.getPrefix())+"| "+message);
+		if(module!=null) {
+			System.out.print(" | "+module);
+		}
+		if(timestamp) {
+			System.out.println(" | "+getCurrentTime());
+		}
+	}
+	private void logColorful(LogType level,String message) {
+		printer.print(String.format("%-6s",level.getPrefix()), Attribute.NONE, level.getfColor(), level.getbColor());
+		printer.clear();
+		printer.print("| ");
+		printer.print(message,Attribute.LIGHT,FColor.NONE,BColor.NONE);
+		printer.clear();
+		if(module!=null) {
+			printer.print(" | ");
+			printer.print(module);
+		}
+		if(timestamp) {
+			printer.print(" | ");
+			printer.print(getCurrentTime());
 		}
 	}
 	private static String getCurrentTime() {
