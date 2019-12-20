@@ -172,12 +172,14 @@ public class NDLogger {
 		}
 		if(isLoggable(level)) {
 			synchronized (System.out) {
-				if(printer==null) {
-					logWithoutColors(level,message);
-				}else {
-					logColorful(level,message);
+				for (String msg : message.split("\n")) {
+					if(printer==null) {
+						logWithoutColors(level,msg);
+					}else {
+						logColorful(level,msg);
+					}
+					System.out.println();
 				}
-				System.out.println();
 			}
 		}
 	}
