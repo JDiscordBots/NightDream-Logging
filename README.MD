@@ -20,8 +20,8 @@ a simple, colorful Logging Library
 ## use Nightdream Logging with SLF4J
 * Add Nightdream Logging and slf4j-api to the dependencies section of your `pom.xml` (replace NDL-VERSION with 
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/io.github.jdiscordbots/nightdream-logging/badge.svg)](https://maven-badges.herokuapp.com/maven-central/io.github.jdiscordbots/nightdream-logging)
-and SLF4J-VERSION with [![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.slf4j/slf4j-api/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.slf4j/slf4j-api)
-
+and SLF4J-VERSION with
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.slf4j/slf4j-api/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.slf4j/slf4j-api)
 ):
 ```xml
 <dependencies>
