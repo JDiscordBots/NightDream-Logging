@@ -21,12 +21,12 @@ class NDSLF4JLogger implements Logger{
 
 	@Override
 	public boolean isTraceEnabled() {
-		return logger.isLoggable(LogType.INFO);
+		return logger.isLoggable(LogType.LOG);
 	}
 
 	@Override
 	public void trace(String msg) {
-		logger.log(LogType.INFO, msg);
+		logger.log(LogType.LOG, msg);
 	}
 
 	@Override
@@ -52,7 +52,7 @@ class NDSLF4JLogger implements Logger{
 
 	@Override
 	public void trace(String msg, Throwable t) {
-		logger.log(LogType.INFO,msg,t);
+		logger.log(LogType.LOG,msg,t);
 	}
 
 	@Override

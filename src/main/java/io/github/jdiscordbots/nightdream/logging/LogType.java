@@ -11,16 +11,17 @@ import com.diogonunes.jcdp.color.api.Ansi.BColor;
 import com.diogonunes.jcdp.color.api.Ansi.FColor;
 
 public enum LogType {
-	LOG(80,FColor.WHITE),
+	FATAL(20,FColor.RED),//rainbow???
+	ERROR(30,FColor.RED),
 	WARN(40,FColor.YELLOW),
 	QUESTION(50,FColor.MAGENTA,"?????"),
 	INFO(60,FColor.BLUE),
 	DONE(60,FColor.GREEN),
-	ERROR(30,FColor.RED),
-	FATAL(20,FColor.RED),//rainbow???
-	DEBUG(90,FColor.CYAN),
 	ARROW(60,FColor.RED,BColor.WHITE,">>>>>"),
-	DEFAULT(60,FColor.WHITE,BColor.CYAN,"====>");
+	DEFAULT(60,FColor.WHITE,BColor.CYAN,"====>"),
+	LOG(80,FColor.WHITE),
+	DEBUG(90,FColor.CYAN);
+	
 	
 	private String prefix;
 	private int level;
