@@ -236,9 +236,7 @@ public class NDLogger {
 		loggable=min;
 	}
 	
-	public static void main(String[] args) {
-		System.setProperty(PROP_PREFIX+"Level.TEST", "DEBUG");
-		logWithModule(LogType.DEBUG, "TEST", ""+LogType.FATAL.isHigherOrEqualThan(LogType.DONE));
+	public String getModule() {
+		return module;
 	}
-	
 }
