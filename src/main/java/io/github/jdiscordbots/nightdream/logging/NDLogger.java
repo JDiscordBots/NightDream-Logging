@@ -157,7 +157,7 @@ public class NDLogger {
 				synchronized (System.out) {
 					log(level,message);
 					throwable.printStackTrace(System.out);
-					printer.clear();
+//					printer.clear();
 				}
 			}
 		}
@@ -194,10 +194,10 @@ public class NDLogger {
 	}
 	private void logColorful(LogType level,String message) {
 		printer.print(String.format("%-6s",level.getPrefix()), Attribute.NONE, level.getfColor(), level.getbColor());
-		printer.clear();
+//		printer.clear();
 		printer.print("| ");
 		printer.print(message,Attribute.LIGHT,FColor.NONE,BColor.NONE);
-		printer.clear();
+//		printer.clear();
 		if(module!=null) {
 			printer.print(" | ");
 			printer.print(module);
