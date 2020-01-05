@@ -164,21 +164,21 @@ class NDSLF4JLogger implements Logger{
 	@Override
 	public void info(String format, Object arg) {
 		if(isInfoEnabled()) {
-			logger.log(String.format(format, arg));
+			info(String.format(format, arg));
 		}
 	}
 
 	@Override
 	public void info(String format, Object arg1, Object arg2) {
 		if(isInfoEnabled()) {
-			logger.log(String.format(format, arg1,arg2));
+			info(String.format(format, arg1,arg2));
 		}
 	}
 
 	@Override
 	public void info(String format, Object... arguments) {
 		if(isInfoEnabled()) {
-			logger.log(String.format(format, arguments));
+			info(String.format(format, arguments));
 		}
 	}
 
@@ -230,21 +230,21 @@ class NDSLF4JLogger implements Logger{
 	@Override
 	public void warn(String format, Object arg) {
 		if(isWarnEnabled()) {
-			logger.log(String.format(format, arg));
+			warn(String.format(format, arg));
 		}
 	}
 
 	@Override
 	public void warn(String format, Object... arguments) {
 		if(isWarnEnabled()) {
-			logger.log(String.format(format, arguments));
+			warn(String.format(format, arguments));
 		}
 	}
 
 	@Override
 	public void warn(String format, Object arg1, Object arg2) {
 		if(isWarnEnabled()) {
-			logger.log(String.format(format, arg1,arg2));
+			warn(String.format(format, arg1,arg2));
 		}
 	}
 
@@ -296,21 +296,21 @@ class NDSLF4JLogger implements Logger{
 	@Override
 	public void error(String format, Object arg) {
 		if(isErrorEnabled()) {
-			logger.log(String.format(format, arg));
+			error(String.format(format, arg));
 		}
 	}
 
 	@Override
 	public void error(String format, Object arg1, Object arg2) {
 		if(isErrorEnabled()) {
-			logger.log(String.format(format, arg1,arg2));
+			error(String.format(format, arg1,arg2));
 		}
 	}
 
 	@Override
 	public void error(String format, Object... arguments) {
 		if(isErrorEnabled()) {
-			logger.log(String.format(format, arguments));
+			error(String.format(format, arguments));
 		}
 	}
 
