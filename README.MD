@@ -17,6 +17,18 @@ a simple, colorful Logging Library
 </dependencies>
 ```
 
+# Limitations
+NightDream-Logging does **not** work with Windows versions lower than *10*.
+
+If you want to use NightDream-Logging with older Windows versions, you should be able to force this by adding the following dependency.
+```xml
+<dependency>
+	<groupId>com.diogonunes</groupId>
+	<artifactId>JCDP</artifactId>
+	<version>[3.0.4]</version>
+</dependency>
+```
+
 ## use Nightdream Logging with SLF4J
 * Add Nightdream Logging and slf4j-api to the dependencies section of your `pom.xml` (replace NDL-VERSION with 
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/io.github.jdiscordbots/nightdream-logging/badge.svg)](https://maven-badges.herokuapp.com/maven-central/io.github.jdiscordbots/nightdream-logging)
