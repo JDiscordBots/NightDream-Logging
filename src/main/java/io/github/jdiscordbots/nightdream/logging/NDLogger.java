@@ -40,7 +40,11 @@ public class NDLogger {
 		}
 		DEFAULT_LEVEL=level;
 		if(!"false".equalsIgnoreCase(System.getProperty(PROP_PREFIX + "colors"))) {
-			printer=new ColoredPrinter.Builder(DEFAULT_LEVEL.getLevel(), false).build();
+			try {
+				printer=new ColoredPrinter.Builder(DEFAULT_LEVEL.getLevel(), false).build();
+			}catch(UnsupportedOperationException e) {
+				printer=null;
+			}
 		}
 		timestamp=Boolean.parseBoolean(System.getProperty(PROP_PREFIX+"timestamp","false"));
 	}
