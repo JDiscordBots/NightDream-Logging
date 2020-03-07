@@ -18,16 +18,11 @@ a simple, colorful Logging Library
 ```
 
 # Limitations
-NightDream-Logging does **not** work with Windows versions lower than *10*.
+NightDream-Logging does **not** support coloring on Windows versions lower than *10*.
 
-If you want to use NightDream-Logging with older Windows versions, you should be able to force this by adding the following dependency.
-```xml
-<dependency>
-	<groupId>com.diogonunes</groupId>
-	<artifactId>JCDP</artifactId>
-	<version>[3.0.4]</version>
-</dependency>
-```
+This is because older windows versions do not support native ANSI escape codes.
+
+NightDream-Logging will just display the Logs without colering in those versions.
 
 ## use Nightdream Logging with SLF4J
 * Add Nightdream Logging and slf4j-api to the dependencies section of your `pom.xml` (replace NDL-VERSION with 
