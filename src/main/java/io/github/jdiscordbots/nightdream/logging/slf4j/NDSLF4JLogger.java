@@ -2,6 +2,8 @@ package io.github.jdiscordbots.nightdream.logging.slf4j;
 
 import org.slf4j.Logger;
 import org.slf4j.Marker;
+import org.slf4j.helpers.FormattingTuple;
+import org.slf4j.helpers.MessageFormatter;
 
 import io.github.jdiscordbots.nightdream.logging.LogType;
 import io.github.jdiscordbots.nightdream.logging.NDLogger;
@@ -32,21 +34,22 @@ class NDSLF4JLogger implements Logger{
 	@Override
 	public void trace(String format, Object arg) {
 		if(isTraceEnabled()) {
-			trace(String.format(format, arg));
+			trace(MessageFormatter.format(format, arg).getMessage());
 		}
 	}
 
 	@Override
 	public void trace(String format, Object arg1, Object arg2) {
 		if(isTraceEnabled()) {
-			trace(String.format(format, arg1,arg2));
+			trace(MessageFormatter.format(format, arg1, arg2).getMessage());
 		}
 	}
 
 	@Override
 	public void trace(String format, Object... arguments) {
 		if(isTraceEnabled()) {
-			trace(String.format(format, arguments));
+			FormattingTuple msg = MessageFormatter.arrayFormat(format, arguments);
+			trace(msg.getMessage(),msg.getThrowable());
 		}
 	}
 
@@ -98,21 +101,22 @@ class NDSLF4JLogger implements Logger{
 	@Override
 	public void debug(String format, Object arg) {
 		if(isDebugEnabled()) {
-			debug(String.format(format, arg));
+			debug(MessageFormatter.format(format, arg).getMessage());
 		}
 	}
 
 	@Override
 	public void debug(String format, Object arg1, Object arg2) {
 		if(isDebugEnabled()) {
-			debug(String.format(format, arg1,arg2));
+			debug(MessageFormatter.format(format, arg1, arg2).getMessage());
 		}
 	}
 
 	@Override
 	public void debug(String format, Object... arguments) {
 		if(isDebugEnabled()) {
-			debug(String.format(format, arguments));
+			FormattingTuple msg = MessageFormatter.arrayFormat(format, arguments);
+			debug(msg.getMessage(),msg.getThrowable());
 		}
 	}
 
@@ -164,21 +168,22 @@ class NDSLF4JLogger implements Logger{
 	@Override
 	public void info(String format, Object arg) {
 		if(isInfoEnabled()) {
-			info(String.format(format, arg));
+			info(MessageFormatter.format(format, arg).getMessage());
 		}
 	}
 
 	@Override
 	public void info(String format, Object arg1, Object arg2) {
 		if(isInfoEnabled()) {
-			info(String.format(format, arg1,arg2));
+			info(MessageFormatter.format(format, arg1, arg2).getMessage());
 		}
 	}
 
 	@Override
 	public void info(String format, Object... arguments) {
 		if(isInfoEnabled()) {
-			info(String.format(format, arguments));
+			FormattingTuple msg = MessageFormatter.arrayFormat(format, arguments);
+			info(msg.getMessage(),msg.getThrowable());
 		}
 	}
 
@@ -230,21 +235,22 @@ class NDSLF4JLogger implements Logger{
 	@Override
 	public void warn(String format, Object arg) {
 		if(isWarnEnabled()) {
-			warn(String.format(format, arg));
+			warn(MessageFormatter.format(format, arg).getMessage());
 		}
 	}
 
 	@Override
 	public void warn(String format, Object... arguments) {
 		if(isWarnEnabled()) {
-			warn(String.format(format, arguments));
+			FormattingTuple msg = MessageFormatter.arrayFormat(format, arguments);
+			warn(msg.getMessage(),msg.getThrowable());
 		}
 	}
 
 	@Override
 	public void warn(String format, Object arg1, Object arg2) {
 		if(isWarnEnabled()) {
-			warn(String.format(format, arg1,arg2));
+			warn(MessageFormatter.format(format, arg1, arg2).getMessage());
 		}
 	}
 
@@ -296,21 +302,22 @@ class NDSLF4JLogger implements Logger{
 	@Override
 	public void error(String format, Object arg) {
 		if(isErrorEnabled()) {
-			error(String.format(format, arg));
+			error(MessageFormatter.format(format, arg).getMessage());
 		}
 	}
 
 	@Override
 	public void error(String format, Object arg1, Object arg2) {
 		if(isErrorEnabled()) {
-			error(String.format(format, arg1,arg2));
+			error(MessageFormatter.format(format, arg1, arg2).getMessage());
 		}
 	}
 
 	@Override
 	public void error(String format, Object... arguments) {
 		if(isErrorEnabled()) {
-			error(String.format(format, arguments));
+			FormattingTuple msg = MessageFormatter.arrayFormat(format, arguments);
+			error(msg.getMessage(),msg.getThrowable());
 		}
 	}
 

@@ -160,7 +160,9 @@ public class NDLogger {
 			}else {
 				synchronized (System.out) {
 					log(level,message);
-					throwable.printStackTrace(System.out);
+					if(throwable!=null) {
+						throwable.printStackTrace(System.out);
+					}
 //					printer.clear();
 				}
 			}

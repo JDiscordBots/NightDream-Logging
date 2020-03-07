@@ -11,4 +11,4 @@ public class NDSLF4JLoggerFactory implements ILoggerFactory{
 	public Logger getLogger(String name) {
 		return new NDSLF4JLogger(name==null?NDLogger.getGlobalLogger():NDLogger.getLogger(name));
 	}
- }
+}
