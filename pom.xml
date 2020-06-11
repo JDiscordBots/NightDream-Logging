@@ -160,24 +160,37 @@
 				</executions>
 			</plugin>
 			<plugin>
-		      	<artifactId>maven-assembly-plugin</artifactId>
-				  <configuration>
-				    <finalName>NightDream-Logging</finalName>
-				    <descriptorRefs>
-				    	<descriptorRef>jar-with-dependencies</descriptorRef>
-				    </descriptorRefs>
-				    <appendAssemblyId>false</appendAssemblyId>
-				  </configuration>
-				  <executions>
-				    <execution>
-				      <id>make-assembly</id>
-				      <phase>package</phase>
-				      <goals>
-				        <goal>single</goal>
-				      </goals>
-				    </execution>
-				  </executions>
-			</plugin> 
+				<artifactId>maven-assembly-plugin</artifactId>
+				<configuration>
+					<finalName>NightDream-Logging</finalName>
+					<descriptorRefs>
+						<descriptorRef>jar-with-dependencies</descriptorRef>
+					</descriptorRefs>
+					<appendAssemblyId>false</appendAssemblyId>
+				</configuration>
+				<executions>
+					<execution>
+						<id>make-assembly</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.jasig.maven</groupId>
+				<artifactId>maven-notice-plugin</artifactId>
+				<version>1.0.6</version>
+				<configuration>
+					<noticeTemplate>https://jdiscordbots.github.io/util/data/notice/NightDream-Logging.template</noticeTemplate>
+					<licenseMapping>
+						<param>https://jdiscordbots.github.io/util/data/notice/license-mappings.xml</param>
+					</licenseMapping>
+					<generateChildNotices>true</generateChildNotices>
+					<fileName>NOTICE.md</fileName>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 	<profiles>
@@ -221,7 +234,7 @@
 						</executions>
 					</plugin>
 				</plugins>
-				
+
 			</build>
 		</profile>
 	</profiles>
