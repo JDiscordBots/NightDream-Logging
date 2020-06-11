@@ -30,6 +30,7 @@ jobs:
       - sonar-scanner -Dsonar.projectKey=JDiscordBots_NightDream-Logging -Dsonar.host.url=https://sonarcloud.io -Dsonar.sources=src/ -Dsonar.java.binaries=target/ -Dsonar.java.libraries=target/
       if: type = push
     - name: check notice
-      jdk: 8
+      jdk: 
+        - openjdk8
       install: true
       script: mvn -B notice:check
