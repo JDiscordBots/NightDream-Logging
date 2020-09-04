@@ -19,47 +19,47 @@ import com.diogonunes.jcdp.color.api.Ansi.BColor;
 import com.diogonunes.jcdp.color.api.Ansi.FColor;
 
 public class NDLogger {
-	
-	private static final String PROP_PREFIX="io.github.jdiscordbots.nightdream.logging.";
-	private static Map<String, NDLogger> loggers=new HashMap<>();
+
+	private static final String PROP_PREFIX = "io.github.jdiscordbots.nightdream.logging.";
+	private static Map<String, NDLogger> loggers = new HashMap<>();
 	private static ColoredPrinter printer;
 	private static boolean timestamp;
-	
+
 	private static final LogType DEFAULT_LEVEL;
-	
+
 	private String module;
 	private LogType loggable;
-	
+
 	static {
 		LogType level = LogType.INFO;
-		String levelProp = System.getProperty(PROP_PREFIX+"Level",level.name()).toUpperCase();
-		try{
+		String levelProp = System.getProperty(PROP_PREFIX + "Level", level.name()).toUpperCase();
+		try {
 			level = LogType.valueOf(levelProp);
-		}catch (IllegalArgumentException e) {
-			//ignore
+		} catch (IllegalArgumentException e) {
+			// ignore
 		}
-		DEFAULT_LEVEL=level;
-		if(!"false".equalsIgnoreCase(System.getProperty(PROP_PREFIX + "colors"))) {
+		DEFAULT_LEVEL = level;
+		if (!"false".equalsIgnoreCase(System.getProperty(PROP_PREFIX + "colors"))) {
 			try {
-				printer=new ColoredPrinter.Builder(DEFAULT_LEVEL.getLevel(), false).build();
-			}catch(UnsupportedOperationException e) {
-				printer=null;
+				printer = new ColoredPrinter.Builder(DEFAULT_LEVEL.getLevel(), false).build();
+			} catch (UnsupportedOperationException e) {
+				printer = null;
 			}
 		}
-		timestamp=Boolean.parseBoolean(System.getProperty(PROP_PREFIX+"timestamp","false"));
+		timestamp = Boolean.parseBoolean(System.getProperty(PROP_PREFIX + "timestamp", "false"));
 	}
 
 	/**
 	 * @param module name of module
 	 */
 	private NDLogger(String module) {
-		this.module=module;
-		String propLevel = System.getProperty(PROP_PREFIX+"Level."+module);
-		if(propLevel!=null) {
-			try{
+		this.module = module;
+		String propLevel = System.getProperty(PROP_PREFIX + "Level." + module);
+		if (propLevel != null) {
+			try {
 				loggable = LogType.valueOf(propLevel);
-			}catch (IllegalArgumentException e) {
-				//ignore
+			} catch (IllegalArgumentException e) {
+				// ignore
 			}
 		}
 	}
@@ -76,7 +76,7 @@ public class NDLogger {
 	 * @return logger with module
 	 */
 	public static synchronized NDLogger getLogger(String module) {
-		if(!loggers.containsKey(module)) {
+		if (!loggers.containsKey(module)) {
 			loggers.put(module, new NDLogger(module));
 		}
 		return loggers.get(module);
@@ -90,158 +90,160 @@ public class NDLogger {
 	}
 
 	/**
-	 * @param message message to log
+	 * @param message   message to log
 	 * @param throwable {@link Throwable} to log
 	 */
-	public static void logWithoutModule(String message,Throwable throwable) {
-		getGlobalLogger().log(null,message,throwable);
+	public static void logWithoutModule(String message, Throwable throwable) {
+		getGlobalLogger().log(null, message, throwable);
 	}
 
 	/**
-	 * @param level {@link LogType logtype}
+	 * @param level   {@link LogType logtype}
 	 * @param message message to log
 	 */
-	public static void logWithoutModule(LogType level,String message) {
-		getGlobalLogger().log(level,message);
+	public static void logWithoutModule(LogType level, String message) {
+		getGlobalLogger().log(level, message);
 	}
 
 	/**
-	 * @param level {@link LogType logtype}
-	 * @param message message to log
+	 * @param level     {@link LogType logtype}
+	 * @param message   message to log
 	 * @param throwable {@link Throwable} to log
 	 */
-	public static void logWithoutModule(LogType level,String message,Throwable throwable) {
-		getGlobalLogger().log(level,message,throwable);
+	public static void logWithoutModule(LogType level, String message, Throwable throwable) {
+		getGlobalLogger().log(level, message, throwable);
 	}
 
 	/**
-	 * @param module name of module
+	 * @param module  name of module
 	 * @param message message to log
 	 */
-	public static void logWithModule(String module,String message) {
+	public static void logWithModule(String module, String message) {
 		getLogger(module).log(message);
 	}
 
 	/**
-	 * @param level {@link LogType logtype}
-	 * @param module name of module
+	 * @param level   {@link LogType logtype}
+	 * @param module  name of module
 	 * @param message message to log
 	 */
-	public static void logWithModule(LogType level,String module,String message) {
-		getLogger(module).log(level,message);
+	public static void logWithModule(LogType level, String module, String message) {
+		getLogger(module).log(level, message);
 	}
 
 	/**
-	 * @param level {@link LogType logtype}
-	 * @param module name of module
-	 * @param message message to log
+	 * @param level     {@link LogType logtype}
+	 * @param module    name of module
+	 * @param message   message to log
 	 * @param throwable {@link Throwable} to log
 	 */
-	public static void logWithModule(LogType level,String module,String message,Throwable throwable) {
-		getLogger(module).log(level,message,throwable);
+	public static void logWithModule(LogType level, String module, String message, Throwable throwable) {
+		getLogger(module).log(level, message, throwable);
 	}
 
 	/**
 	 * @param message message to log
 	 */
 	public void log(String message) {
-		log(null,message);
+		log(null, message);
 	}
 
 	/**
-	 * @param level {@link LogType logtype}
-	 * @param message message to log
+	 * @param level     {@link LogType logtype}
+	 * @param message   message to log
 	 * @param throwable {@link Throwable} to log
 	 */
-	public void log(LogType level,String message,Throwable throwable) {
-		if(isLoggable(level)) {
-			if(printer==null) {
-				throwable.printStackTrace();
-			}else {
-				synchronized (System.out) {
-					log(level,message);
-					if(throwable!=null) {
-						throwable.printStackTrace(System.out);
-					}
-//					printer.clear();
+	public void log(LogType level, String message, Throwable throwable) {
+		if (isLoggable(level)) {
+			synchronized (System.out) {
+				log(level, message);
+				if (throwable != null) {
+					throwable.printStackTrace(System.out);
 				}
 			}
 		}
 	}
+
 	/**
-	 * @param level {@link LogType log type}
+	 * @param level   {@link LogType log type}
 	 * @param message message to log
 	 */
-	public void log(LogType level,String message) {
-		if(level==null) {
-			level=LogType.DEFAULT;
+	public void log(LogType level, String message) {
+		if (level == null) {
+			level = LogType.DEFAULT;
 		}
-		if(isLoggable(level)) {
+		if (isLoggable(level)) {
 			synchronized (System.out) {
 				for (String msg : message.split("\n")) {
-					if(printer==null) {
-						logWithoutColors(level,msg);
-					}else {
-						logColorful(level,msg);
+					if (printer == null) {
+						logWithoutColors(level, msg);
+					} else {
+						logColorful(level, msg);
 					}
 					System.out.println();
 				}
 			}
 		}
 	}
-	private void logWithoutColors(LogType level,String message) {
-		System.out.print(String.format("%-6s",level.getPrefix())+"| "+message);
-		if(module!=null) {
-			System.out.print(" | "+module);
+
+	private void logWithoutColors(LogType level, String message) {
+		System.out.print(String.format("%-6s", level.getPrefix()) + "| " + message);
+		if (module != null) {
+			System.out.print(" | " + module);
 		}
-		if(timestamp) {
-			System.out.println(" | "+getCurrentTime());
+		if (timestamp) {
+			System.out.println(" | " + getCurrentTime());
 		}
 	}
-	private void logColorful(LogType level,String message) {
-		printer.print(String.format("%-6s",level.getPrefix()), Attribute.NONE, level.getfColor(), level.getbColor());
-//		printer.clear();
+
+	private void logColorful(LogType level, String message) {
+		printer.print(String.format("%-6s", level.getPrefix()), Attribute.NONE, level.getfColor(), level.getbColor());
 		printer.print("| ");
-		printer.print(message,Attribute.LIGHT,FColor.NONE,BColor.NONE);
-//		printer.clear();
-		if(module!=null) {
+		printer.print(message, Attribute.LIGHT, FColor.NONE, BColor.NONE);
+		if (module != null) {
 			printer.print(" | ");
 			printer.print(module);
 		}
-		if(timestamp) {
+		if (timestamp) {
 			printer.print(" | ");
 			printer.print(getCurrentTime());
 		}
 	}
+
 	private static String getCurrentTime() {
-		return Instant.now().atZone(ZoneId.systemDefault()).format(DateTimeFormatter.ofPattern("EEE MMM dd yyyy HH:mm:ss 'GMT'Z (zzz)"));
+		return Instant.now().atZone(ZoneId.systemDefault())
+				.format(DateTimeFormatter.ofPattern("EEE MMM dd yyyy HH:mm:ss 'GMT'Z (zzz)"));
 	}
+
 	/**
 	 * tests if a {@link LogType} will be logged or not
+	 * 
 	 * @param level the {@link LogType} to check
 	 * @return <code>true</code> if it is loggable
 	 */
 	public boolean isLoggable(LogType level) {
-		if(level==null) {
+		if (level == null) {
 			return false;
 		}
 		LogType compare;
-		if(loggable==null) {
-			compare=DEFAULT_LEVEL;
-		}else {
-			compare=loggable;
+		if (loggable == null) {
+			compare = DEFAULT_LEVEL;
+		} else {
+			compare = loggable;
 		}
 		return level.isHigherOrEqualThan(compare);
 	}
+
 	/**
 	 * sets the minimum {@link LogType}.<br>
 	 * Logs with this LogType or higher will be logged.
+	 * 
 	 * @param min the minimum {@link LogType}
 	 */
 	public void setMinimum(LogType min) {
-		loggable=min;
+		loggable = min;
 	}
-	
+
 	public String getModule() {
 		return module;
 	}

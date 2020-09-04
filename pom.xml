@@ -3,7 +3,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>nightdream-logging</artifactId>
-	<version>1.1.9</version>
+	<version>1.1.10</version>
 	<packaging>jar</packaging>
 	<name>NightDream Logging</name>
 	<description>a simple, colorful Logging Library</description>

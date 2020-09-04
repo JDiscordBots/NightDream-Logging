@@ -41,18 +41,21 @@ class NDSLF4JLogger implements Logger{
 	@Override
 	public void trace(String format, Object arg1, Object arg2) {
 		if(isTraceEnabled()) {
-			trace(MessageFormatter.format(format, arg1, arg2).getMessage());
+			trace(MessageFormatter.format(format, arg1, arg2));
 		}
 	}
 
 	@Override
 	public void trace(String format, Object... arguments) {
 		if(isTraceEnabled()) {
-			FormattingTuple msg = MessageFormatter.arrayFormat(format, arguments);
-			trace(msg.getMessage(),msg.getThrowable());
+			trace(MessageFormatter.arrayFormat(format, arguments));
 		}
 	}
-
+	
+	private void trace(FormattingTuple format) {
+		trace(format.getMessage(),format.getThrowable());
+	}
+	
 	@Override
 	public void trace(String msg, Throwable t) {
 		logger.log(LogType.LOG,msg,t);
@@ -108,16 +111,19 @@ class NDSLF4JLogger implements Logger{
 	@Override
 	public void debug(String format, Object arg1, Object arg2) {
 		if(isDebugEnabled()) {
-			debug(MessageFormatter.format(format, arg1, arg2).getMessage());
+			debug(MessageFormatter.format(format, arg1, arg2));
 		}
 	}
 
 	@Override
 	public void debug(String format, Object... arguments) {
 		if(isDebugEnabled()) {
-			FormattingTuple msg = MessageFormatter.arrayFormat(format, arguments);
-			debug(msg.getMessage(),msg.getThrowable());
+			debug(MessageFormatter.arrayFormat(format, arguments));
 		}
+	}
+	
+	private void debug(FormattingTuple format) {
+		debug(format.getMessage(),format.getThrowable());
 	}
 
 	@Override
@@ -175,16 +181,18 @@ class NDSLF4JLogger implements Logger{
 	@Override
 	public void info(String format, Object arg1, Object arg2) {
 		if(isInfoEnabled()) {
-			info(MessageFormatter.format(format, arg1, arg2).getMessage());
+			info(MessageFormatter.format(format, arg1, arg2));
 		}
 	}
 
 	@Override
 	public void info(String format, Object... arguments) {
 		if(isInfoEnabled()) {
-			FormattingTuple msg = MessageFormatter.arrayFormat(format, arguments);
-			info(msg.getMessage(),msg.getThrowable());
+			info(MessageFormatter.arrayFormat(format, arguments));
 		}
+	}
+	private void info(FormattingTuple format) {
+		info(format.getMessage(),format.getThrowable());
 	}
 
 	@Override
@@ -242,18 +250,21 @@ class NDSLF4JLogger implements Logger{
 	@Override
 	public void warn(String format, Object... arguments) {
 		if(isWarnEnabled()) {
-			FormattingTuple msg = MessageFormatter.arrayFormat(format, arguments);
-			warn(msg.getMessage(),msg.getThrowable());
+			info(MessageFormatter.arrayFormat(format, arguments));
 		}
 	}
 
 	@Override
 	public void warn(String format, Object arg1, Object arg2) {
 		if(isWarnEnabled()) {
-			warn(MessageFormatter.format(format, arg1, arg2).getMessage());
+			warn(MessageFormatter.format(format, arg1, arg2));
 		}
 	}
 
+	private void warn(FormattingTuple format) {
+		warn(format.getMessage(),format.getThrowable());
+	}
+	
 	@Override
 	public void warn(String msg, Throwable t) {
 		logger.log(LogType.WARN,msg,t);
@@ -309,18 +320,21 @@ class NDSLF4JLogger implements Logger{
 	@Override
 	public void error(String format, Object arg1, Object arg2) {
 		if(isErrorEnabled()) {
-			error(MessageFormatter.format(format, arg1, arg2).getMessage());
+			error(MessageFormatter.format(format, arg1, arg2));
 		}
 	}
 
 	@Override
 	public void error(String format, Object... arguments) {
 		if(isErrorEnabled()) {
-			FormattingTuple msg = MessageFormatter.arrayFormat(format, arguments);
-			error(msg.getMessage(),msg.getThrowable());
+			error(MessageFormatter.arrayFormat(format, arguments));
 		}
 	}
 
+	private void error(FormattingTuple format) {
+		error(format.getMessage(),format.getThrowable());
+	}
+	
 	@Override
 	public void error(String msg, Throwable t) {
 		logger.log(LogType.ERROR,msg,t);
